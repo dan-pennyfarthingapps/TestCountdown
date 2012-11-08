@@ -96,4 +96,21 @@
     <InterfaceDefinition Include="TestCountdownViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\1.png" />
+    <Content Include="images\1%402x.png" />
+    <Content Include="images\2.png" />
+    <Content Include="images\2%402x.png" />
+    <Content Include="images\3.png" />
+    <Content Include="images\3%402x.png" />
+    <Content Include="images\4.png" />
+    <Content Include="images\4%402x.png" />
+    <Content Include="images\5.png" />
+    <Content Include="images\5%402x.png" />
+    <Content Include="images\go.png" />
+    <Content Include="images\go%402x.png" />
+  </ItemGroup>
 </Project>

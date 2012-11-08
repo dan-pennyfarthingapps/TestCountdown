@@ -8,8 +8,13 @@ namespace TestCountdown
 {
 	public partial class TestCountdownViewController : UIViewController
 	{
+
+		private int timerCount;
+		private UIView countdownView;
+
 		public TestCountdownViewController () : base ("TestCountdownViewController", null)
 		{
+			timerCount = 0;
 		}
 		
 		public override void DidReceiveMemoryWarning ()
@@ -47,13 +52,45 @@ namespace TestCountdown
 		}
 
 		private void Countdown() {
-			UIView countdownView = new UIView(this.View.Bounds);
-			UILabel number = new UILabel(RectangleF.FromLTRB(40.0f, 40.0f, 5.0f, 5.0f));
-			number.Text = "5";
-			countdownView.Add(number);
+			NSTimer timer;
+
+			timer = NSTimer.CreateRepeatingScheduledTimer (TimeSpan.FromSeconds (1), UpdateTimer);
+
+			countdownView = new UIView(this.View.Bounds);
+		
+			UIImageView countdownImageView = new UIImageView();
+			countdownImageView.AnimationImages = new UIImage[] {
+				UIImage.FromBundle("images/5"),
+				UIImage.FromBundle("images/4"),
+				UIImage.FromBundle("images/3"),
+				UIImage.FromBundle("images/2"),
+				UIImage.FromBundle("images/1"),
+				UIImage.FromBundle("images/go")
+			};
+			countdownImageView.AnimationRepeatCount = 1;
+			countdownImageView.AnimationDuration = 2.0;
+
+
+
+			countdownImageView.Frame = new RectangleF(122.5f, 202.5f, 75, 75);
+
+
+			countdownView.AddSubview(countdownImageView);
+			countdownView.BackgroundColor = UIColor.Black;
 
 			this.View.AddSubview(countdownView);
 
+			countdownImageView.StartAnimating();
+
+		}
+
+		[Export ("UpdateTimer")]
+		private void UpdateTimer ()
+		{
+			this.timerCount++; 
+			if (this.timerCount >= 2) {
+				this.countdownView.RemoveFromSuperview();
+			} 
 		}
 	}
 }
